@@ -23,8 +23,8 @@ export default function PoolChecker() {
           ? `✅ Pool PDA exists: ${poolPda.toBase58()}`
           : `❌ Pool not found for ${poolPda.toBase58()}`
       );
-    } catch (err: any) {
-      setStatus(`Error: ${err.message}`);
+    } catch (err: unknown) {
+      if (err instanceof Error) setStatus(`Error: ${err.message}`|| 'Error');
     }
   };
 
