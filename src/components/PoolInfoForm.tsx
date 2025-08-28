@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-// import { getPoolReservesAndSupply } from "@/lib/pool";
+import { getPoolReservesAndSupply } from "@/lib/pool";
 
 type PoolStatusType = -1 | 0 | 1 | null;
 
@@ -22,14 +22,14 @@ export default function PoolInfoForm({
     tokenBDecimals: number;
   } | null>(null);
 
-  // useEffect(() => {
-  //   (async () => {
-  //     if (poolStatus === 1) {
-  //       const r = await getPoolReservesAndSupply(tokenA, tokenB);
-  //       setReserves(r);
-  //     }
-  //   })();
-  // }, [tokenA, tokenB, poolStatus]);
+  useEffect(() => {
+    (async () => {
+      if (poolStatus === 1) {
+        const r = await getPoolReservesAndSupply(tokenA, tokenB);
+        setReserves(r);
+      }
+    })();
+  }, [tokenA, tokenB, poolStatus]);
 
   if (poolStatus !== 1 || !reserves) return null;
 

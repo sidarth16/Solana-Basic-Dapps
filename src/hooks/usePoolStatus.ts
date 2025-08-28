@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { checkPoolExistsOnDevnet } from "@/lib/pool";
-// import { isValidSolanaTokenAddress } from "@/lib/solana";
+import { isValidSolanaTokenAddress } from "@/lib/solana";
 
 
 // Status meaning:
@@ -19,12 +19,12 @@ export function usePoolStatus(tokenA: string, tokenB: string) {
           return;
         }
 
-        // const validA = await isValidSolanaTokenAddress(tokenA);
-        // const validB = await isValidSolanaTokenAddress(tokenB);
-        // if (!validA || !validB) {
-        //   setPoolStatus(-1);
-        //   return;
-        // }
+        const validA = await isValidSolanaTokenAddress(tokenA);
+        const validB = await isValidSolanaTokenAddress(tokenB);
+        if (!validA || !validB) {
+          setPoolStatus(-1);
+          return;
+        }
 
         const exists = await checkPoolExistsOnDevnet(tokenA, tokenB);
         setPoolStatus(exists ? 1 : 0);

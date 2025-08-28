@@ -1,6 +1,6 @@
 import { PublicKey } from "@solana/web3.js";
 import { connection, PROGRAM_ID } from "./solana";
-// import { Program, AnchorProvider } from "@coral-xyz/anchor";
+import { Program, AnchorProvider } from "@coral-xyz/anchor";
 
 const programId = new PublicKey(PROGRAM_ID);
 
@@ -27,37 +27,37 @@ export async function checkPoolExistsOnDevnet(
 }
 
 
-// export async function getPoolReservesAndSupply(tokenA: string, tokenB: string) {
-//   try {
-//     const tokenAPub = new PublicKey(tokenA);
-//     const tokenBPub = new PublicKey(tokenB);
-//     const programId = new PublicKey(PROGRAM_ID);
+export async function getPoolReservesAndSupply(tokenA: string, tokenB: string) {
+  try {
+    const tokenAPub = new PublicKey(tokenA);
+    const tokenBPub = new PublicKey(tokenB);
+    const programId = new PublicKey(PROGRAM_ID);
 
-//     const [poolPDA] = PublicKey.findProgramAddressSync(
-//       [Buffer.from("pool"), tokenAPub.toBuffer(), tokenBPub.toBuffer()],
-//       programId
-//     );
+    const [poolPDA] = PublicKey.findProgramAddressSync(
+      [Buffer.from("pool"), tokenAPub.toBuffer(), tokenBPub.toBuffer()],
+      programId
+    );
 
-//     const idl = await Program.fetchIdl(programId, { connection });
-//     if (!idl) throw new Error("Failed to fetch IDL");
+    const idl = await Program.fetchIdl(programId, { connection });
+    if (!idl) throw new Error("Failed to fetch IDL");
 
-//     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-//     const provider = new AnchorProvider(connection, {} as any, AnchorProvider.defaultOptions());
-//     const program = new Program(idl, provider);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const provider = new AnchorProvider(connection, {} as any, AnchorProvider.defaultOptions());
+    const program = new Program(idl, provider);
 
-//     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-//     const pool = await (program.account as any).pool.fetch(poolPDA);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const pool = await (program.account as any).pool.fetch(poolPDA);
 
-//     const tokenADecimals = pool.tokenADecimals;
-//     const tokenBDecimals = pool.tokenBDecimals;
+    const tokenADecimals = pool.tokenADecimals;
+    const tokenBDecimals = pool.tokenBDecimals;
 
-//     const vaultA = BigInt((await connection.getTokenAccountBalance(pool.tokenAVault)).value.amount);
-//     const vaultB = BigInt((await connection.getTokenAccountBalance(pool.tokenBVault)).value.amount);
-//     const supplyLP = BigInt((await connection.getTokenSupply(pool.lpMint)).value.amount);
+    const vaultA = BigInt((await connection.getTokenAccountBalance(pool.tokenAVault)).value.amount);
+    const vaultB = BigInt((await connection.getTokenAccountBalance(pool.tokenBVault)).value.amount);
+    const supplyLP = BigInt((await connection.getTokenSupply(pool.lpMint)).value.amount);
 
-//     return { vaultA, vaultB, supplyLP, tokenADecimals, tokenBDecimals };
-//   } catch (err) {
-//     console.error("Fetch Reserves error:", err);
-//     return null;
-//   }
-// }
+    return { vaultA, vaultB, supplyLP, tokenADecimals, tokenBDecimals };
+  } catch (err) {
+    console.error("Fetch Reserves error:", err);
+    return null;
+  }
+}
