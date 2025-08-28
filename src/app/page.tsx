@@ -5,6 +5,8 @@ import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { useEffect, useState } from "react";
 import { Connection, clusterApiUrl } from "@solana/web3.js";
 
+import PoolChecker from "@/components/PoolChecker";
+
 export default function Home() {
   const { publicKey } = useWallet();
   const [balance, setBalance] = useState<number | null>(null);
@@ -32,6 +34,11 @@ export default function Home() {
       )}
 
       {balance !== null && <p>Balance: {balance} SOL</p>}
+
+      <PoolChecker />
     </main>
   );
 }
+
+
+
