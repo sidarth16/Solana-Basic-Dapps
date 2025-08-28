@@ -41,6 +41,7 @@ export async function getPoolReservesAndSupply(tokenA: string, tokenB: string) {
     const idl = await Program.fetchIdl(programId, { connection });
     if (!idl) throw new Error("Failed to fetch IDL");
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const provider = new AnchorProvider(connection, {} as any, AnchorProvider.defaultOptions());
     const program = new Program(idl, provider);
 
