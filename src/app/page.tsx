@@ -3,12 +3,12 @@
 import { useState } from "react";
 import TokenInputs from "@/components/TokenInputs";
 import PoolStatus from "@/components/PoolStatus";
-// import PoolInfoForm from "@/components/PoolInfoForm";
+import PoolInfoForm from "@/components/PoolInfoForm";
 import { usePoolStatus } from "@/hooks/usePoolStatus";
 
 export default function HomePage() {
-  const [tokenA, setTokenA] = useState("");
-  const [tokenB, setTokenB] = useState("");
+  const [tokenA, setTokenA] = useState("H68y5nKjyc8ESB6dn7syQ1FWn1axU7DYDB5VE9MTAU2c");
+  const [tokenB, setTokenB] = useState("6v1CkZ2w3uybFfkGf5pNE7SWV2QDL6ok5Z8U6Tpa311o");
   
   const poolStatus = usePoolStatus(tokenA, tokenB);
 
@@ -19,7 +19,7 @@ export default function HomePage() {
       <h1 className="text-3xl font-bold">🚀 MiniSwap</h1>
       <TokenInputs tokenA={tokenA} setTokenA={setTokenA} tokenB={tokenB} setTokenB={setTokenB} />
       <PoolStatus poolStatus={poolStatus} />
-      {/* <PoolInfoForm poolStatus={poolStatus} tokenA={tokenA} tokenB={tokenB} /> */}
+      <PoolInfoForm poolStatus={poolStatus} tokenA={tokenA} tokenB={tokenB} />
     </div>
   );
 }
