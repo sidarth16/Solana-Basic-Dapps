@@ -7,6 +7,7 @@ import TokenInputs from "@/components/TokenInputs";
 import PoolStatus from "@/components/PoolStatus";
 import AddLiquidityForm from "@/components/AddLiquidityForm";
 import { usePoolStatus } from "@/hooks/usePoolStatus";
+import { useUserTokenBalance } from "@/hooks/useUserTokenBalance";
 
 export default function HomePage() {
   const wallet = useAnchorWallet();
@@ -17,14 +18,14 @@ export default function HomePage() {
 
   //hooks
   const poolStatus = usePoolStatus(tokenA, tokenB);
-
+  const userTokenBalance = useUserTokenBalance(tokenA, tokenB, wallet?.publicKey ?? null)
 
   return (
     <div className="flex flex-col items-center  min-h-[70vh] p-7">
       <h1 className="text-3xl font-bold">⚡️ MiniSwap</h1>
       
       {/* Token inputs */}
-      <TokenInputs tokenA={tokenA} setTokenA={setTokenA} tokenB={tokenB} setTokenB={setTokenB} />
+      <TokenInputs tokenA={tokenA} setTokenA={setTokenA} tokenB={tokenB} setTokenB={setTokenB} userTokenBalance={userTokenBalance} />
 
       {/* Status */}
       <PoolStatus poolStatus={poolStatus} />

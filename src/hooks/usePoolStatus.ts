@@ -21,7 +21,7 @@ export function usePoolStatus(tokenA: string, tokenB: string) {
 
         const validA = await isValidSolanaTokenAddress(tokenA);
         const validB = await isValidSolanaTokenAddress(tokenB);
-        if (!validA || !validB) {
+        if (!validA || !validB || tokenA==tokenB) {
           setPoolStatus(-1);
           return;
         }

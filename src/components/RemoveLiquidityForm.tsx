@@ -16,6 +16,7 @@ export default function RemoveLiquidityForm(
   tokenA: string; tokenB: string;  
   walletConnected: boolean;
   }) {
+    const [userLPBalance, setUserLPBalance] = useState('10');
     const [amountLpToBurn, setAmountLpToBurn] = useState('');
     const [estimatedTokensOut, setEstimatedTokensOut] = useState<{ amountA: bigint; amountB: bigint } | null>(null);
     const [reserves, setReserves] = useState<{
@@ -27,7 +28,7 @@ export default function RemoveLiquidityForm(
     useEffect(() => {
         (async () => {
             try{
-                if (poolStatus === 1) {
+                if (poolStatus === 1 && tokenA && tokenB) {
                     const r = await getPoolReservesAndSupply(tokenA, tokenB);
                     setReserves(r);
                 }
@@ -73,6 +74,9 @@ export default function RemoveLiquidityForm(
             onChange={(e) => setAmountLpToBurn(e.target.value)}
             className="p-3 rounded-xl bg-white/10 text-white placeholder-gray-300 border border-white/20 w-full"
           />
+          <p className="text-xs text-gray-300/70 mt-1">
+            User LP Balance: {userLPBalance}
+        </p>
         </div>
 
         {/* Button */}

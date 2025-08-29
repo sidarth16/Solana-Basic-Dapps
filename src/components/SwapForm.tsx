@@ -30,7 +30,7 @@ export default function SwapForm(
     useEffect(() => {
         (async () => {
             try{
-                if (poolStatus === 1) {
+                if (poolStatus === 1 && tokenA && tokenB) {
                     const r = await getPoolReservesAndSupply(tokenA, tokenB);
                     setReserves(r);
                 }
@@ -93,10 +93,13 @@ export default function SwapForm(
           value={amountSwapIn}
           onChange={(e) => setAmountSwapIn(e.target.value)}
         />
+        <p className="text-xs text-gray-300/70 mt-1">
+          User Balance: {100}
+        </p>
       </div>
 
       {/* Swap Direction */}
-      <p className="text-center -mt-3 mb-3 text-lg ">↓</p>
+      <p className="text-center -mt-3 mb-1 text-lg ">↓</p>
 
       {/* Estimated Output */}
       <div className="flex flex-col">
@@ -108,6 +111,9 @@ export default function SwapForm(
           value={estimatedTokensOut?.toString() || ''}
           disabled
         />
+        <p className="text-xs text-gray-300/70 mt-1">
+          User Balance: {100}
+        </p>
       </div>
       
       {/* Min Amount Out */}

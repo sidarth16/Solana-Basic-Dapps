@@ -28,7 +28,7 @@ export default function PoolInfoForm({
 
   useEffect(() => {
     (async () => {
-      if (poolStatus === 1) {
+      if (poolStatus === 1 && tokenA && tokenB) {
         const r = await getPoolReservesAndSupply(tokenA, tokenB);
         setReserves(r);
       }
