@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getTokenBalance } from "@/lib/solana";
+import { getUserTokenBalances } from "@/lib/solana";
 import type{PublicKey } from "@solana/web3.js";
 
 
@@ -16,7 +16,7 @@ export function useUserTokenBalance(tokenA: string, tokenB: string, walletPubkey
           return;
         }
 
-        const userTokenBalance = await getTokenBalance(tokenA, tokenB, walletPubkey);
+        const userTokenBalance = await getUserTokenBalances(tokenA, tokenB, walletPubkey);
         if (userTokenBalance) {
           setUserTokenBalance(userTokenBalance);
           return;
