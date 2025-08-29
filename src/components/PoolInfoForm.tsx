@@ -5,6 +5,10 @@ import { getPoolReservesAndSupply } from "@/lib/pool";
 
 type PoolStatusType = -1 | 0 | 1 | null;
 
+
+/* ----------------------------------------------
+  Home Pool Info Form Component (with labels)
+------------------------------------------------ */
 export default function PoolInfoForm({
   poolStatus,
   tokenA,
