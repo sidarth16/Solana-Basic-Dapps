@@ -23,19 +23,20 @@ export async function isValidSolanaTokenAddress(addr: string): Promise<boolean> 
 
 export async function getTokenBalance(tokenA: string, tokenB: string, walletPubkey: PublicKey ) {
   try {
+    const { getAssociatedTokenAddress, getAccount } = await import("@solana/spl-token");
     // console.log("fetching balances", walletPubkey);
     // if (!walletPubkey) return null;
     const tokenAPub = new PublicKey(tokenA);
     const tokenBPub = new PublicKey(tokenB);
 
-    // const ataA = await getAssociatedTokenAddress(tokenAPub, walletPubkey);
-    // const ataB = await getAssociatedTokenAddress(tokenBPub, walletPubkey);
+    const ataA = await getAssociatedTokenAddress(tokenAPub, walletPubkey);
+    const ataB = await getAssociatedTokenAddress(tokenBPub, walletPubkey);
 
-    // const balanceTokenA = BigInt((await connection.getTokenAccountBalance(ataA)).value.amount);
-    // const balanceTokenB = BigInt((await connection.getTokenAccountBalance(ataB)).value.amount);
+    const balanceTokenA = BigInt((await connection.getTokenAccountBalance(ataA)).value.amount);
+    const balanceTokenB = BigInt((await connection.getTokenAccountBalance(ataB)).value.amount);
 
-    const balanceTokenA = BigInt(10000);
-    const balanceTokenB = BigInt(10000);
+    // const balanceTokenA = BigInt(10000);
+    // const balanceTokenB = BigInt(10000);
 
     return { balanceTokenA, balanceTokenB};
   } catch (err) {
