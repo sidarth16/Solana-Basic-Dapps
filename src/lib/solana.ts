@@ -1,8 +1,7 @@
 // keeps constants in one place
 
 import { Connection, PublicKey } from "@solana/web3.js";
-// import { getMint } from "@solana/spl-token";
-import { getAssociatedTokenAddress } from "@solana/spl-token";
+// import { getAssociatedTokenAddress } from "@solana/spl-token";
 
 export const connection = new Connection("https://api.devnet.solana.com");
 
@@ -29,15 +28,15 @@ export async function getTokenBalance(tokenA: string, tokenB: string, walletPubk
     const tokenAPub = new PublicKey(tokenA);
     const tokenBPub = new PublicKey(tokenB);
 
-    const ataA = await getAssociatedTokenAddress(tokenAPub, walletPubkey);
-    const ataB = await getAssociatedTokenAddress(tokenBPub, walletPubkey);
+    // const ataA = await getAssociatedTokenAddress(tokenAPub, walletPubkey);
+    // const ataB = await getAssociatedTokenAddress(tokenBPub, walletPubkey);
 
-    const balanceTokenA = BigInt((await connection.getTokenAccountBalance(ataA)).value.amount);
-    const balanceTokenB = BigInt((await connection.getTokenAccountBalance(ataB)).value.amount);
+    // const balanceTokenA = BigInt((await connection.getTokenAccountBalance(ataA)).value.amount);
+    // const balanceTokenB = BigInt((await connection.getTokenAccountBalance(ataB)).value.amount);
 
-    // console.log("fetching balances : ", balanceTokenA);
+    const balanceTokenA = BigInt(10000);
+    const balanceTokenB = BigInt(10000);
 
-    
     return { balanceTokenA, balanceTokenB};
   } catch (err) {
     // console.error("Fetch Token Balances error:", err);
